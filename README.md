@@ -38,11 +38,7 @@ cp .env.example .env
 docker compose up --build
 ```
 
-This starts Postgres, the API, and the frontend together. First run only — seed the database:
-
-```bash
-docker compose exec backend npm run seed
-```
+This starts Postgres, the API, and the frontend together. The backend container seeds the database itself on every start (see `backend/docker-entrypoint.sh`) before the server comes up — the seed is idempotent (skips the reviewer account and any invoice number that already exists), so no separate seed step is needed.
 
 | Service | URL |
 |---|---|
